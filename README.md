@@ -8,13 +8,19 @@ Begin to use machine learning, in form of pattern recognition, to teach our prog
 
 
 ## Requirements
-* Python 2.7.5
+<ul>
+<li>  Python 2.7.5 </li>
+
 <ul>
 <li> numpy </li>
 <li> matplotlib </li>
 <li> PIL or pillow </li>
 </ul>
-* Images to test our program 
+
+<li> Images to test our program </li>
+
 <ul>
 <li> Download from sentdex.com/tutorialimages.zip </li>
+</ul>
+
 </ul>
