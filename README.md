@@ -24,3 +24,11 @@ Begin to use machine learning, in form of pattern recognition, to teach our prog
 </ul>
 
 </ul>
+
+## Problem faced
+Using defauly python installed in Linux CentOS 7, you need to install <strong> subprocess32</strong> and <strong> tkinter</strong> manually using
+`pip install tkinter && pip install subprocess32`
+
+Then you need to run
+`echo "backend: qt4agg" > ~/.config/matplotlib/matplotlibrc
+` 
