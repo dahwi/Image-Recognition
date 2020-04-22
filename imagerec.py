@@ -8,6 +8,24 @@ image = Image.open('images/numbers/0.1.png')
 imageArr = np.asarray(image)
 
 
+
+def createExamples():
+	numberArrayExamples = open('numArEx.txt','a')
+	number = range(0,10)
+	version = range(1,10)
+	
+	for num in number:
+		for v in version:
+			imgFileName = 'images/numbers/'+str(num)+'.'+str(v)+'.png'
+			ei = Image.open(imgFileName)
+			eiarr = np.array(ei)
+			eiar1 = str(eiarr.tolist())
+
+			lineToWrite = str(num) + '::'+eiar1+'\n'
+			numberArrayExamples.write(lineToWrite)
+			
+createExamples()
+
 #change the values so that each pixel in the picture will be either black or white
 def threshold(imageArray):
 	balanceArr = []
@@ -65,7 +83,7 @@ imageArr3.setflags(write = 1)
 image4 = Image.open('images/sentdex.png')
 imageArr4 = np.asarray(image4)
 imageArr4.setflags(write = 1)
-
+'''
 threshold(imageArr2)
 threshold(imageArr3)
 threshold(imageArr4)
@@ -82,4 +100,4 @@ ax3.imshow(imageArr3)
 ax4.imshow(imageArr4)
 
 plt.show()
-	
+'''	
