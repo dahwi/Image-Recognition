@@ -15,12 +15,25 @@ def threshold(imageArray):
 	
 	for row in imageArray:
 		for pixel in row:
+			'''
+			#calculate the average value of r,g,b pixel values of each pixel using reduce function
 			avgNum = reduce(lambda x, y : x+y, pixel[:3])/len(pixel[:3])
+			'''		
+			#if you do not want to use reduce function, you have to manually 
+			#calculate the average value of r,g,b. Notice that the range is from 0 to 255, so you need to adjust if the sum is greater than equal to 255	
+			val = 0
+			for color in pixel[:3]:
+				val += color
+				if(val >= 255):
+					 val %= 255
+					 val -= 1
+			avgNum = val / 3
 			balanceArr.append(avgNum)
 
+	#calculate the average pixel value of all pixels in the imageArray
 	balance = reduce(lambda x, y : x+y, balanceArr)/len(balanceArr)
 
-		
+	#update the imageArray in a way that if average value of r,g,b is bigger than average pixel value of the imageArray, set it to white. Black otherwise.		
 	for row in newArr:
 		for pixel in row:
 			if reduce(lambda x, y : x+y, pixel[:3])/len(pixel[:3]) > balance:
