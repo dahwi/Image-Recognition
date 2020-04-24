@@ -4,10 +4,6 @@ import matplotlib.pyplot as plt
 import time
 from collections import Counter
 
-image = Image.open('images/numbers/0.1.png')
-#spit out a correspoding array(3D) of this image above
-imageArr = np.asarray(image)
-
 
 #create a file called numArEx.txt which contains the number and examples that match that specific number
 def createExamples():
@@ -68,9 +64,11 @@ def threshold(imageArray):
 
 def whatNumIsThis(filepath):
 	matchedArr = []
+	#read in the numArEx.txt file and split it with a delimiter "\n"
 	loadExamps = open('numArEx.txt', 'r').read()
 	loadExamps = loadExamps.split('\n')
 	
+	#open the file to test and transform it to array&List
 	i = Image.open(filepath)
 	iArr = np.array(i)
 	iArrL = iArr.tolist()
@@ -78,18 +76,21 @@ def whatNumIsThis(filepath):
 	inQuestion = str(iArrL)
 
 	for eachExample in loadExamps:
+	#the reason for 'if len(eachExample) > 3' is that after split, the last element is null
 		if len(eachExample) > 3:
 			splitEx = eachExample.split('::')
+			#current number we are comparing
 			currentNum = splitEx[0]
+			#rows of pixels of this current number in a string format
 			currentArr = splitEx[1]
-			
+			#split rows of pixels so that we can compare pixel by pixel
 			eachPixEx = currentArr.split('],')
-			
 			eachPixInQ = inQuestion.split('],')
 			
 			x = 0 
 				
 			while x < len(eachPixEx):
+				#if pixel matches between test picture and current number, add current number to matchedArr
 				if eachPixEx[x] == eachPixInQ[x]:
 					matchedArr.append(int(currentNum))
 
@@ -97,7 +98,33 @@ def whatNumIsThis(filepath):
 
 	c = Counter(matchedArr)	
 	print c
-		
+
+	#show the visual output 
+	X = []	#number
+	Y = []	#number of matches
+
+	for eachThing in c:
+		X.append(eachThing)
+		Y.append(c[eachThing])
+	
+	fig = plt.figure()
+	ax1 = plt.subplot2grid((4,4),(0,0), rowspan = 1, colspan = 4)
+	ax2 = plt.subplot2grid((4,4),(1,0), rowspan = 3, colspan = 4)
+	
+	ax1.imshow(iArr)
+	ax2.bar(X,Y,align = 'center')
+
+	plt.ylim(400)
+	
+	xloc = plt.MaxNLocator(12)
+
+	ax2.xaxis.set_major_locator(xloc)
+
+	plt.show()
+
+
+
+
 
 whatNumIsThis('images/test.png')
 
