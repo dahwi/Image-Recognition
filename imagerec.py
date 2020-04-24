@@ -2,13 +2,14 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import time
+from collections import Counter
 
 image = Image.open('images/numbers/0.1.png')
 #spit out a correspoding array(3D) of this image above
 imageArr = np.asarray(image)
 
 
-
+#create a file called numArEx.txt which contains the number and examples that match that specific number
 def createExamples():
 	numberArrayExamples = open('numArEx.txt','a')
 	number = range(0,10)
@@ -24,8 +25,6 @@ def createExamples():
 			lineToWrite = str(num) + '::'+eiar1+'\n'
 			numberArrayExamples.write(lineToWrite)
 			
-createExamples()
-
 #change the values so that each pixel in the picture will be either black or white
 def threshold(imageArray):
 	balanceArr = []
@@ -67,37 +66,38 @@ def threshold(imageArray):
 
 	return newArr
 
+def whatNumIsThis(filepath):
+	matchedArr = []
+	loadExamps = open('numArEx.txt', 'r').read()
+	loadExamps = loadExamps.split('\n')
+	
+	i = Image.open(filepath)
+	iArr = np.array(i)
+	iArrL = iArr.tolist()
 
-image1 = Image.open('images/numbers/0.1.png')
-imageArr1 = np.asarray(image)
+	inQuestion = str(iArrL)
 
-image2 = Image.open('images/numbers/y0.4.png')
-imageArr2 = np.asarray(image2)
-imageArr2.setflags(write = 1)
+	for eachExample in loadExamps:
+		if len(eachExample) > 3:
+			splitEx = eachExample.split('::')
+			currentNum = splitEx[0]
+			currentArr = splitEx[1]
+			
+			eachPixEx = currentArr.split('],')
+			
+			eachPixInQ = inQuestion.split('],')
+			
+			x = 0 
+				
+			while x < len(eachPixEx):
+				if eachPixEx[x] == eachPixInQ[x]:
+					matchedArr.append(int(currentNum))
 
-image3 = Image.open('images/numbers/y0.5.png')
-imageArr3 = np.asarray(image3)
-imageArr3.setflags(write = 1)
+				x += 1
 
+	c = Counter(matchedArr)	
+	print c
+		
 
-image4 = Image.open('images/sentdex.png')
-imageArr4 = np.asarray(image4)
-imageArr4.setflags(write = 1)
-'''
-threshold(imageArr2)
-threshold(imageArr3)
-threshold(imageArr4)
+whatNumIsThis('images/test.png')
 
-fig = plt.figure()
-ax1 = plt.subplot2grid((8,6),(0,0),rowspan = 4, colspan = 3)
-ax2 = plt.subplot2grid((8,6),(4,0),rowspan = 4, colspan = 3)
-ax3 = plt.subplot2grid((8,6),(0,3),rowspan = 4, colspan = 3)
-ax4 = plt.subplot2grid((8,6),(4,3),rowspan = 4, colspan = 3)
-
-ax1.imshow(imageArr1)
-ax2.imshow(imageArr2)
-ax3.imshow(imageArr3)
-ax4.imshow(imageArr4)
-
-plt.show()
-'''	
