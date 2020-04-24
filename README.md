@@ -38,4 +38,4 @@ Matplotlib chooses Xwindows backend by default. You need to set matplotlib to no
 
 `ValueError: assignment destination is read-only` is raised when assigning new values to numpy array meaning that you can only access but cannot modify them. This problem is fixed by downgrading numpy using `pip install numpy==1.15.4` and setting a flag parameter using `your_array_name.setflags(write = 1)` 
 
-When creating a piture in png file to test, make sure the file is rgba-32bit png file. If not, use delimeter ', 255],' instead of '],' to split rows of pixels of pitures you are comparing your test picture with
+When creating a piture in png file to test, make sure the file is rgba-32bit png file. If not, use delimeter `, 255],` instead of `],` to split rows of pixels of pitures you are comparing your test picture with
