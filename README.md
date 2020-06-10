@@ -1,5 +1,5 @@
 # Image-Recognition
-All work is from the tutorial "Image Recognition and Python" by sentdex
+
 ## Overview
 Image Recognition is used for all sores of things such as facial recognition, identifying what picture contains, etc 
 
