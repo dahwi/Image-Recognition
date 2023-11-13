@@ -1,10 +1,10 @@
 # Image-Recognition
 
 ## Overview
-Image Recognition is used for all sores of things such as facial recognition, identifying what picture contains, etc 
+Image Recognition is used for all sorts of things such as facial recognition, identifying what a picture contains, etc 
 
 ## Goal of the Project
-Begin to use machine learning, in form of pattern recognition, to teach our program what text looks like
+Begin to use machine learning, in the form of pattern recognition, to teach our program what text looks like
 
 
 ## Requirements
